@@ -7,7 +7,18 @@ namespace NaturalDeduction.src
 {
     class Rule
     {
+        Solution solution;
         Statement baseStatement;
-        List<Statement> aboveStatements;
+
+        public Rule(Solution solution, Statement baseStatement)
+        {
+            this.solution = solution;
+            this.baseStatement = baseStatement;
+        }
+
+        public virtual void Solve()
+        {
+            //
+        }
     }
 }

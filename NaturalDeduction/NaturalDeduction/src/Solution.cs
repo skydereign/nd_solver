@@ -10,9 +10,18 @@ namespace NaturalDeduction.src
         Statement problem;
         List<Rule> rules;
 
-        public bool Solve()
+        public Solution()
         {
-            return false;
+            problem = new Statement(this, 0);
+            problem.Print();
+        }
+
+        public void Solve()
+        {
+            Console.Write("\nsolution solving ");
+            problem.Print();
+            Console.WriteLine("");
+            problem.Solve();
         }
     }
 }

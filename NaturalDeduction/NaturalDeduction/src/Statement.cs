@@ -10,14 +10,17 @@ namespace NaturalDeduction.src
         public enum Qualifier {None, Contradiction, Negation, Forall, Foreach};
         public enum Rules {And, Or, Implies};
 
+        Solution solution;
         List<Statement> subStatements;
         List<Rules> connectors;
         Qualifier qualifier;
+        Rule solver;
         char data;
         bool proven;
 
-        public Statement(int type)
+        public Statement(Solution solution, int type)
         {
+            this.solution = solution;
             subStatements = new List<Statement>();
             connectors = new List<Rules>();
 
@@ -26,13 +29,43 @@ namespace NaturalDeduction.src
 
         public void Solve()
         {
-            //
+            if(connectors.Count > 0)
+            {
+                // create a rule
+                Statement firstStatement = subStatements[0];
+                Statement nextStatement = Split(1);
+                Rule currentRule = null;
+
+                Console.Write("Solving nextStatement = ");
+                nextStatement.Print();
+
+                switch(connectors[0])
+                {
+                    case Rules.Implies:
+                        currentRule = new ImpliesRule(solution, firstStatement, nextStatement, this);
+                        break;
+                }
+
+                // add rule to the solution
+                currentRule.Solve(); // solve the rule
+            }
         }
 
-        public List<Statement> Split(int index)
+        // should probably make this a constructor
+        public Statement Split(int index)
         {
             List<Statement> statements = subStatements.GetRange(index, subStatements.Count - index);
-            return statements;
+            List<Rules> rules = connectors.GetRange(index, connectors.Count - index);
+            Statement newStatement = new Statement(solution, 999);
+            newStatement.Set(statements, rules);
+            
+            return newStatement;
+        }
+
+        public void Set (List<Statement> newStatements, List<Rules> rules)
+        {
+            subStatements = newStatements;
+            connectors = rules;
         }
 
         public void Print()
@@ -63,16 +96,16 @@ namespace NaturalDeduction.src
             switch(type)
             {
                 case 0: // (P->Q) -> P -> ~Q -> R
-                    subStatements.Add(new Statement(5));
+                    subStatements.Add(new Statement(solution, 5));
                     connectors.Add(Rules.Implies);
-                    
-                    subStatements.Add(new Statement(1));
+
+                    subStatements.Add(new Statement(solution, 1));
                     connectors.Add(Rules.Implies);
-                    
-                    subStatements.Add(new Statement(3));
+
+                    subStatements.Add(new Statement(solution, 3));
                     connectors.Add(Rules.Implies);
-                    
-                    subStatements.Add(new Statement(4));
+
+                    subStatements.Add(new Statement(solution, 4));
                     break;
 
                 case 1: // P
@@ -93,10 +126,10 @@ namespace NaturalDeduction.src
                     break;
 
                 case 5: // (P->Q)
-                    subStatements.Add(new Statement(1));
+                    subStatements.Add(new Statement(solution, 1));
                     connectors.Add(Rules.Implies);
 
-                    subStatements.Add(new Statement(2));
+                    subStatements.Add(new Statement(solution, 2));
                     break;
             }
         }

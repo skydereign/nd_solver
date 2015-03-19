@@ -36,10 +36,10 @@ namespace NaturalDeduction
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-            Statement test = new Statement(0);
-            Console.WriteLine("-----------------");
-            test.Print();
-            Console.WriteLine("-----------------");
+            Console.WriteLine("----------------------------------");
+            Solution test = new Solution();
+            test.Solve();
+            Console.WriteLine("\n----------------------------------");
             
             base.Initialize();
         }
