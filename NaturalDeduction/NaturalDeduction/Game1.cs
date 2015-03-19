@@ -40,7 +40,20 @@ namespace NaturalDeduction
             Solution test = new Solution();
             test.Solve();
             Console.WriteLine("\n----------------------------------");
-            
+
+
+            Console.WriteLine("\n\n");
+            Console.WriteLine("( Exists x.A(x) ) implies ( Forall y.( A(y) implies B ) ) implies ( B ) )");
+            Console.WriteLine("\t\t\t\tImplies Introduction");
+            Console.WriteLine("( Forall y.( A(y) implies B ) ) implies ( B )");
+            Console.WriteLine("\t\t\t\tImplies Introduction");
+            Console.WriteLine("( B )");
+            Console.WriteLine("\t\t\t\tExists Elimination");
+            Console.WriteLine("( B )");
+            Console.WriteLine("\t\t\t\tImplies Elimination");
+            Console.WriteLine("( A(z) implies B )");
+            Console.WriteLine("\t\t\t\tForall Elimination");
+            Console.WriteLine("( q )");
             base.Initialize();
         }
 

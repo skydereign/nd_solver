@@ -5,12 +5,12 @@ using System.Text;
 
 namespace NaturalDeduction.src
 {
-    class ImpliesRule : Rule
+    class ImpliesIntroRule : Rule
     {
         Statement firstStatement;
         Statement aboveStatement;
 
-        public ImpliesRule(Solution solution, Statement firstStatement, Statement aboveStatement, Statement baseStatement) : base(solution, baseStatement)
+        public ImpliesIntroRule(Solution solution, Statement firstStatement, Statement aboveStatement, Statement baseStatement) : base(solution, baseStatement)
         {
             this.firstStatement = firstStatement;
             this.aboveStatement = aboveStatement;

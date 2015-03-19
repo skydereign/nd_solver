@@ -27,6 +27,9 @@ namespace NaturalDeduction.src
             Init(type);
         }
 
+        /// <summary>
+        /// Solves for the statement in the reverse method (going up in the tree)
+        /// </summary>
         public void Solve()
         {
             Print();
@@ -41,7 +44,7 @@ namespace NaturalDeduction.src
                 switch(connectors[0])
                 {
                     case Rules.Implies:
-                        currentRule = new ImpliesRule(solution, firstStatement, nextStatement, this);
+                        currentRule = new ImpliesIntroRule(solution, firstStatement, nextStatement, this);
                         break;
                 }
 
@@ -60,6 +63,9 @@ namespace NaturalDeduction.src
                 if(nextPiece != null)
                 {
                     // start solving
+
+                    // in test case gets ¬Q -> R
+                    // 
                 }
                 else
                 {
@@ -67,6 +73,24 @@ namespace NaturalDeduction.src
                 }
             }
             Console.WriteLine("");
+        }
+
+        public void ForwardSolve()
+        {
+            switch(qualifier)
+            {
+                case Qualifier.None:
+                    // proceed normally
+                    break;
+
+                case Qualifier.Forall:
+                    // proceed with forall elimination
+                    break;
+
+                case Qualifier.Foreach:
+                    // proceed with foreach elimination
+                    break;
+            }
         }
 
         // should probably make this a constructor
