@@ -37,6 +37,9 @@ namespace NaturalDeduction
         {
             // TODO: Add your initialization logic here
             Statement test = new Statement(0);
+            Console.WriteLine("-----------------");
+            test.Print();
+            Console.WriteLine("-----------------");
             
             base.Initialize();
         }

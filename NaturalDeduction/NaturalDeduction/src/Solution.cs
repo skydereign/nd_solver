@@ -7,5 +7,12 @@ namespace NaturalDeduction.src
 {
     class Solution
     {
+        Statement problem;
+        List<Rule> rules;
+
+        public bool Solve()
+        {
+            return false;
+        }
     }
 }

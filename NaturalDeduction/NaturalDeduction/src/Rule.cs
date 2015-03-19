@@ -7,5 +7,7 @@ namespace NaturalDeduction.src
 {
     class Rule
     {
+        Statement baseStatement;
+        List<Statement> aboveStatements;
     }
 }

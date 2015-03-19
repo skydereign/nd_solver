@@ -14,6 +14,7 @@ namespace NaturalDeduction.src
         List<Rules> connectors;
         Qualifier qualifier;
         char data;
+        bool proven;
 
         public Statement(int type)
         {
@@ -21,6 +22,40 @@ namespace NaturalDeduction.src
             connectors = new List<Rules>();
 
             Init(type);
+        }
+
+        public void Solve()
+        {
+            //
+        }
+
+        public List<Statement> Split(int index)
+        {
+            List<Statement> statements = subStatements.GetRange(index, subStatements.Count - index);
+            return statements;
+        }
+
+        public void Print()
+        {
+            int i = 0;
+            if (subStatements.Count > 0) { Console.Write("( "); }
+            foreach(Statement s in subStatements)
+            {
+                s.Print();
+
+                if(i < connectors.Count)
+                {
+                    // need Qualifier printing forall/foreach/negation
+                    Console.Write(connectors[i] + " ");
+                    i++;
+                }
+            }
+            if (subStatements.Count > 0) { Console.Write(") "); }
+            
+            if(data != 0)
+            {
+                Console.Write(data + " ");
+            }
         }
 
         public void Init(int type)
