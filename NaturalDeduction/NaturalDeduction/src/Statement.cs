@@ -15,7 +15,7 @@ namespace NaturalDeduction.src
         List<Rules> connectors;
         Qualifier qualifier;
         Rule solver;
-        char data = ' ';
+        public char data = ' ';
         bool proven;
 
         public Statement(Solution solution, int type)
@@ -48,6 +48,23 @@ namespace NaturalDeduction.src
                 // add rule to the solution
                 currentRule.Solve(); // solve the rule
                 Console.WriteLine("");
+            }
+            else
+            {
+                // solve when no obvious rule is present
+                // need to derive from existing things in solution bank
+                // search for last statement in solutions equals goal
+                // if so find out what rule needs to happen to obtain that
+                Statement nextPiece = solution.GetReverse(this);
+
+                if(nextPiece != null)
+                {
+                    // start solving
+                }
+                else
+                {
+                    Console.WriteLine("\n\nnot solvable");
+                }
             }
             Console.WriteLine("");
         }
@@ -125,6 +142,10 @@ namespace NaturalDeduction.src
 
                     temp = new Statement(solution, 4);
                     subStatements.Add(temp);
+
+
+                    temp = new Statement(solution, 10);
+                    solution.AddOther(temp);
                     break;
 
                 case 1: // P
@@ -147,9 +168,26 @@ namespace NaturalDeduction.src
                 case 5: // (P->Q)
                     subStatements.Add(new Statement(solution, 1));
                     connectors.Add(Rules.Implies);
-
                     subStatements.Add(new Statement(solution, 2));
                     break;
+
+                case 10: // tilda Q -> R
+                    subStatements.Add(new Statement(solution, 3));
+                    connectors.Add(Rules.Implies);
+                    subStatements.Add(new Statement(solution, 4));
+                    break;
+            }
+        }
+
+        public Statement GetLast()
+        {
+            if (subStatements.Count > 0)
+            {
+                return subStatements[subStatements.Count - 1];
+            }
+            else
+            {
+                return this;
             }
         }
     }

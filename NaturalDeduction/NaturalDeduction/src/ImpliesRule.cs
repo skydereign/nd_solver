@@ -45,7 +45,6 @@ namespace NaturalDeduction.src
             }
 
             // check if this needs to be solved?
-            // check if solution has firstStatement (hopefully)
         }
     }
 }
