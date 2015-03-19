@@ -85,13 +85,18 @@ namespace NaturalDeduction.src
 
                 if(i < connectors.Count)
                 {
-                    // need Qualifier printing forall/foreach/negation
                     Console.Write(connectors[i] + " ");
                     i++;
                 }
             }
             if (subStatements.Count > 0) { Console.Write(") "); }
-            
+
+            switch (qualifier)
+            {
+                case Qualifier.Negation:
+                    Console.Write("¬");
+                    break;
+            }
             if(data != ' ')
             {
                 Console.Write(data + " ");
