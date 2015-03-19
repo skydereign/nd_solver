@@ -18,9 +18,34 @@ namespace NaturalDeduction.src
 
         public override void Solve()
         {
+            // need to check firstStatement is already in proven, if not solve
+            // need to check aboveStatement to solve
+            Console.WriteLine("Implies Introduction!");
+
+            if (!solution.Solved(firstStatement))
+            {
+                firstStatement.Solve();
+            }
+            else
+            {
+                Console.Write("first --- Solved ---");
+                firstStatement.Print();
+                Console.WriteLine("");
+            }
+
+            if(!solution.Solved(aboveStatement))
+            {
+                aboveStatement.Solve();
+            }
+            else
+            {
+                Console.Write("above --- Solved ---");
+                aboveStatement.Print();
+                Console.WriteLine("");
+            }
+
+            // check if this needs to be solved?
             // check if solution has firstStatement (hopefully)
-            Console.WriteLine("Implies!");
-            aboveStatement.Solve();
         }
     }
 }

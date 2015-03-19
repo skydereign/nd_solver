@@ -7,8 +7,8 @@ namespace NaturalDeduction.src
 {
     class Rule
     {
-        Solution solution;
-        Statement baseStatement;
+        protected Solution solution;
+        protected Statement baseStatement;
 
         public Rule(Solution solution, Statement baseStatement)
         {

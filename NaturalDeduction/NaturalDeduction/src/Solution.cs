@@ -9,9 +9,12 @@ namespace NaturalDeduction.src
     {
         Statement problem;
         List<Rule> rules;
+        List<Statement> proven;
 
         public Solution()
         {
+            proven = new List<Statement>();
+
             problem = new Statement(this, 0);
             problem.Print();
         }
@@ -22,6 +25,16 @@ namespace NaturalDeduction.src
             problem.Print();
             Console.WriteLine("");
             problem.Solve();
+        }
+
+        public void AddProven(Statement statement)
+        {
+            proven.Add(statement);
+        }
+
+        public bool Solved(Statement statement)
+        {
+            return proven.Contains(statement);
         }
     }
 }
